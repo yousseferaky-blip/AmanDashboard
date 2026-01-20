@@ -1,0 +1,19 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { HiOutlineCreditCard } from 'react-icons/hi';
+
+const WalletsContent: React.FC = () => {
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-6 space-y-6">
+      <div className="flex items-center gap-3 mb-6">
+        <HiOutlineCreditCard className="w-8 h-8 text-blue-500" />
+        <h1 className="text-2xl font-bold text-gray-800">إدارة المحفظات</h1>
+      </div>
+      <div className="bg-white rounded-lg shadow-sm p-8 flex flex-col items-center justify-center min-h-[300px]">
+        <p className="text-lg text-gray-600">هنا يمكنك إدارة المحفظات في النظام.</p>
+      </div>
+    </motion.div>
+  );
+};
+
+export default WalletsContent; 
