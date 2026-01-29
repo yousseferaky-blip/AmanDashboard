@@ -4,6 +4,7 @@ import { HiTicket, HiSearch, HiFilter, HiX, HiPlus, HiPencil, HiTrash } from 're
 import Swal from 'sweetalert2';
 import axiosInstance from '../../api/AxiosIntance';
 import CouponCreateModal from './CouponCreateModal';
+import LoadingSpinner from '../../assets/LoadingSpinner';
 
 interface Coupon {
   id: number;
@@ -244,7 +245,7 @@ const CouponsContent: React.FC = () => {
           <h2 className="text-base sm:text-lg font-semibold text-gray-800">قائمة الكوبونات</h2>
         </div>
         <div className="p-3 sm:p-4 md:p-6">
-          {loading && <p className="text-gray-500 text-center py-8">جاري التحميل...</p>}
+          {loading &&<LoadingSpinner />}
           {error && !loading && <p className="text-red-600 text-center py-8">{error}</p>}
           {!loading && !error && (
             <>

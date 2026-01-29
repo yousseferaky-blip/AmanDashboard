@@ -10,6 +10,7 @@ import {
   HiTrash,
   HiSwitchHorizontal,
 } from "react-icons/hi";
+import LoadingSpinner from "../../assets/LoadingSpinner";
 
 /* ================= Interface ================= */
 
@@ -324,12 +325,7 @@ const Advertisement = () => {
     fetchAds();
   };
 
-    /* ===== LoadingSpinner ===== */
-  const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-48">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500" />
-  </div>
-  );
+
 
   return (
     <motion.div className="p-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>

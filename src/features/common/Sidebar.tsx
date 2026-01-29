@@ -22,6 +22,7 @@ import {
   HiTrendingUp,
   HiPhone,
   HiOutlineShieldCheck,
+  HiOutlineKey,
 } from "react-icons/hi";
 import { BiMessage, BiNotification } from "react-icons/bi";
 import { IoIosNotifications } from "react-icons/io";
@@ -158,6 +159,13 @@ const userPermissions: string[] = (() => {
       name: "الصلاحيات",
       icon: HiOutlineShieldCheck  ,
       path: "/permission",
+      hasDropdown: false,
+    },
+    {
+      id: 204,
+      name: "رموز التحقق",
+      icon: HiOutlineKey  ,
+      path: "/verification-codes",
       hasDropdown: false,
     },
     {

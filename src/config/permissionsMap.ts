@@ -22,6 +22,8 @@ export const PERMISSIONS_ROUTES: Record<string, string> = {
 
   "الصلاحيات": "/permission",
 
+ "رموز التحقق": "/verification-codes",
+
   "الاشعارات": "/notification",
 
   "المحادثات": "/message",

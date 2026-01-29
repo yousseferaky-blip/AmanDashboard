@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingSpinner from '../../assets/LoadingSpinner';
 
 type DriverStatus = 'Pending' | 'Accepted' | 'Rejected' | string;
 
@@ -883,7 +884,7 @@ const [submittingApproval, setSubmittingApproval] = useState(false);
         </div>
         <div className="p-6">
           {loading && (
-            <p className="text-gray-500">جاري التحميل...</p>
+           <LoadingSpinner />
           )}
           {error && !loading && (
             <p className="text-red-600">{error}</p>

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { HiUserGroup, HiSearch, HiFilter, HiTrash, HiBell, HiX, HiPencil, HiArrowDown, HiArrowUp } from 'react-icons/hi';
 import axiosInstance from '../../api/AxiosIntance';
 import Swal from 'sweetalert2';
+import LoadingSpinner from '../../assets/LoadingSpinner';
 
 type CustomerDto = {
   id: string;
@@ -523,7 +524,7 @@ const ClientsContent: React.FC = () => {
           <h2 className="text-lg font-semibold text-gray-800">قائمة العملاء</h2>
         </div>
         <div className="p-6">
-          {loading && <p className="text-gray-500">جاري التحميل...</p>}
+          {loading &&<LoadingSpinner />}
           {error && !loading && <p className="text-red-600">{error}</p>}
           {!loading && !error && (
             <div className="overflow-x-auto">

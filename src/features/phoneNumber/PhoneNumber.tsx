@@ -4,6 +4,7 @@ import axiosInstance from '../../api/AxiosIntance';
 import Swal from 'sweetalert2';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingSpinner from '../../assets/LoadingSpinner';
 
 interface ContactNumber {
   id: number;
@@ -128,12 +129,7 @@ const PhoneNumber: React.FC = () => {
     }
   };
 
-  // Loading
-  const LoadingSpinner = () => (
-    <div className="flex items-center justify-center min-h-48">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500" />
-    </div>
-  );
+
 
   if (loading) return <LoadingSpinner />;
 

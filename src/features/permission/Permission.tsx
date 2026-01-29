@@ -1,15 +1,12 @@
-// src/pages/dashboard/Permission.jsx
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../api/AxiosIntance";
 import Swal from "sweetalert2";
 import {
   FiPlus,
-  FiEdit,
-  FiTrash2,
-  FiSave,
   FiX,
   FiUserCheck,
 } from "react-icons/fi";
+import LoadingSpinner from "../../assets/LoadingSpinner";
 
 const Permission = () => {
   const [permissions, setPermissions] = useState([]);
@@ -92,13 +89,8 @@ const Permission = () => {
     }
   };
 
-  /* ================= UI ================= */
 
-  const LoadingSpinner = () => (
-    <div className="flex items-center justify-center min-h-48">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500" />
-    </div>
-  );
+
   /* ================= Employee ================= */
 
   const fetchEmployees = async () => {

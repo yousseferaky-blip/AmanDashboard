@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { HiTruck, HiSearch, HiFilter, HiX } from 'react-icons/hi';
 import Swal from 'sweetalert2';
 import axiosInstance from '../../api/AxiosIntance';
+import LoadingSpinner from '../../assets/LoadingSpinner';
 
 interface DriverBrief {
   id: string;
@@ -55,6 +56,7 @@ const CarsContent: React.FC = () => {
   const [query, setQuery] = useState<string>('');
   const [selected, setSelected] = useState<CarItem | null>(null);
   const [approving, setApproving] = useState<Set<number>>(new Set());
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -146,7 +148,7 @@ const CarsContent: React.FC = () => {
           <h2 className="text-lg font-semibold text-gray-800">قائمة السيارات</h2>
         </div>
         <div className="p-6 overflow-x-auto">
-          {loading && <p className="text-gray-500">جاري التحميل...</p>}
+          {loading && <LoadingSpinner />}
           {error && !loading && <p className="text-red-600">{error}</p>}
           {!loading && !error && (
             <table className="min-w-full divide-y divide-gray-200">
@@ -170,7 +172,7 @@ const CarsContent: React.FC = () => {
                     <td className="px-4 py-3 text-sm text-gray-700">{i + 1}</td>
                     <td className="px-4 py-3">
                       {car.carImage ? (
-                        <img src={car.carImage} className="w-12 h-12 object-cover rounded" />
+                        <img onClick={() => setPreviewImage(car.carImage!)} src={car.carImage} className="w-12 h-12 object-cover rounded" />
                       ) : (
                         <div className="w-10 h-10 bg-gray-200 rounded flex items-center justify-center">
                           <HiTruck className="w-5 h-5 text-gray-500" />
@@ -219,6 +221,7 @@ const CarsContent: React.FC = () => {
           )}
         </div>
       </div>
+
       {selected && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl relative max-h-[90vh] flex flex-col">
@@ -272,10 +275,10 @@ const CarsContent: React.FC = () => {
                 <div className="border rounded p-4">
                   <h4 className="font-semibold text-gray-800 mb-2">صور السيارة</h4>
                   <div className="flex gap-3 flex-wrap">
-                    {selected.carImage && <img src={selected.carImage} className="w-24 h-16 object-cover rounded" />}
-                    {selected.frontImage && <img src={selected.frontImage} className="w-24 h-16 object-cover rounded" />}
-                    {selected.backImage && <img src={selected.backImage} className="w-24 h-16 object-cover rounded" />}
-                    {selected.licenseImage && <img src={selected.licenseImage} className="w-24 h-16 object-cover rounded" />}
+                    {selected.carImage && <img  onClick={() => setPreviewImage(selected.carImage!)} src={selected.carImage} className="w-24 h-16 object-cover rounded" />}
+                    {selected.frontImage && <img  onClick={() => setPreviewImage(selected.frontImage!)} src={selected.frontImage} className="w-24 h-16 object-cover rounded" />}
+                    {selected.backImage && <img  onClick={() => setPreviewImage(selected.backImage!)} src={selected.backImage} className="w-24 h-16 object-cover rounded" />}
+                    {selected.licenseImage && <img  onClick={() => setPreviewImage(selected.licenseImage!)} src={selected.licenseImage} className="w-24 h-16 object-cover rounded" />}
                   </div>
                 </div>
                 <div className="border rounded p-4">
@@ -315,6 +318,30 @@ const CarsContent: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* previewImage */}
+
+      {previewImage && (
+        <motion.div
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-[999]"
+          onClick={() => setPreviewImage(null)}
+        >
+          <img
+            src={previewImage}
+            className="max-w-[90%] max-h-[90%] rounded-lg shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+
+          <button
+            className="absolute top-6 right-6 text-white text-3xl"
+            onClick={() => setPreviewImage(null)}
+          >
+            ✕
+          </button>
+        </motion.div>
+      )}
+
+
     </motion.div>
   );
 };

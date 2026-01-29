@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './features/common/Layout';
 import ProtectedRoute from './features/common/ProtectedRoute';
 import DriverDetails from './pages/driver-details/DriverDetails';
+import Verificationcodes from './features/verification-codes/Verificationcodes';
+import LoadingSpinner from './assets/LoadingSpinner';
 
 // Lazy load all page components
 const LoginPage = React.lazy(() => import('./pages/login'));
@@ -26,12 +28,6 @@ const Notification = React.lazy(() => import('./features/Notification/Notificati
 const Message = React.lazy(() => import('./features/messages/Message'));
 const SettingsPage = React.lazy(() => import('./pages/settings'));
 
-// Loading component
-const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-  </div>
-);
 
 function App() {
   return (
@@ -162,6 +158,13 @@ function App() {
               <ProtectedRoute>
                 <Layout>
                   <Permission />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/verification-codes" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Verificationcodes />
                 </Layout>
               </ProtectedRoute>
             } />
