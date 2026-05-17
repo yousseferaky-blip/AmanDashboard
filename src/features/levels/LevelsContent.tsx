@@ -145,7 +145,7 @@ const LevelsContent: React.FC = () => {
 
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-3">
-          <HiTrendingUp className="w-8 h-8 text-indigo-800" />
+          <HiTrendingUp className="w-8 h-8 text-#022949" />
           <h1 className="text-2xl font-bold text-gray-800">إدارة المستويات</h1>
         </div>
         <button

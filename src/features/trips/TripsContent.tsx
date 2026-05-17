@@ -471,7 +471,7 @@ const TripsContent: React.FC = () => {
         </div>
       </div>
       {selected && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-#022949 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl h-[90vh] overflow-y-auto w-full max-w-3xl p-6 relative">
             <button
               className="absolute top-3 left-3 p-2 rounded hover:bg-gray-100"
@@ -645,7 +645,7 @@ const TripsContent: React.FC = () => {
 
       {/* Route Details Dialog */}
       {routeDialogOpen && selectedRoute && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-#022949 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-6 relative mx-4">
             <button
               className="absolute top-3 left-3 p-2 rounded hover:bg-gray-100"

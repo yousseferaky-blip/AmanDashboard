@@ -1047,7 +1047,7 @@ const [submittingApproval, setSubmittingApproval] = useState(false);
 
       {/* Update Limit Dialog */}
       {isLimitDialogOpen && (
-        <div className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeLimitDialog}>
+        <div className="fixed inset-0 z-[999] bg-#022949 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeLimitDialog}>
           <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between px-5 py-4 border-b sticky top-0 bg-white z-10">
               <h3 className="text-lg font-bold text-gray-900">
@@ -1116,7 +1116,7 @@ const [submittingApproval, setSubmittingApproval] = useState(false);
 
       {/* Send Notification Modal */}
       {isNotificationModalOpen && (
-        <div className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeNotificationModal}>
+        <div className="fixed inset-0 z-[999] bg-#022949 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeNotificationModal}>
           <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between px-5 py-4 border-b sticky top-0 bg-white z-10">
               <h3 className="text-lg font-bold text-gray-900">
@@ -1230,7 +1230,7 @@ const [submittingApproval, setSubmittingApproval] = useState(false);
 
       {/* Edit Driver Modal */}
       {isEditModalOpen && editingDriverId && (
-        <div className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeEditModal}>
+        <div className="fixed inset-0 z-[999] bg-#022949 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeEditModal}>
           <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between px-5 py-4 border-b sticky top-0 bg-white z-10">
               <h3 className="text-lg font-bold text-gray-900">تعديل بيانات السائق</h3>
@@ -1320,7 +1320,7 @@ const [submittingApproval, setSubmittingApproval] = useState(false);
 
       {/* Deposit Modal */}
       {isDepositModalOpen && selectedWalletUserId && (
-        <div className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeDepositModal}>
+        <div className="fixed inset-0 z-[999] bg-#022949 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeDepositModal}>
           <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between px-5 py-4 border-b sticky top-0 bg-white z-10">
               <h3 className="text-lg font-bold text-gray-900">إيداع في المحفظة</h3>
@@ -1401,7 +1401,7 @@ const [submittingApproval, setSubmittingApproval] = useState(false);
 
       {/* Withdraw Modal */}
       {isWithdrawModalOpen && selectedWalletUserId && (
-        <div className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeWithdrawModal}>
+        <div className="fixed inset-0 z-[999] bg-#022949 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeWithdrawModal}>
           <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between px-5 py-4 border-b sticky top-0 bg-white z-10">
               <h3 className="text-lg font-bold text-gray-900">سحب من المحفظة</h3>
@@ -1496,7 +1496,7 @@ const [submittingApproval, setSubmittingApproval] = useState(false);
 
       {/* isApproveModalOpen */}
         {isApproveModalOpen && (
-          <div className="fixed inset-0 z-[999] bg-black/50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-[999] bg-#022949 flex items-center justify-center p-4">
             <div className="bg-white rounded-xl w-full max-w-lg p-5">
               <h3 className="text-lg font-bold mb-4">اعتماد أنواع السيارة</h3>
 

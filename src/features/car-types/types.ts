@@ -6,6 +6,9 @@ export interface CarType {
   minPricePerKm: number;
   maxPricePerKm: number;
   minimumFare?: number;
+  pricePerKmYemen?: number;
+  minimumFareYemen?: number;
+  surgePriceMultiplierYemen?: number;
   surgePriceMultiplier?: number; 
   isActive: boolean;
   description?: string | null;

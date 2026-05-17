@@ -1085,7 +1085,7 @@ const handleApproveCarTypes = async () => {
 
       {/* Deduct Dialog */}
       {isDeductDialogOpen && (
-        <div className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setIsDeductDialogOpen(false)}>
+        <div className="fixed inset-0 z-[999] bg-#022949 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setIsDeductDialogOpen(false)}>
           <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between px-5 py-4 border-b">
               <h3 className="text-lg font-bold text-gray-900">خصم من العمولة</h3>
@@ -1142,7 +1142,7 @@ const handleApproveCarTypes = async () => {
 
       {previewImage && (
         <div
-          className="fixed inset-0 z-[9999] bg-black/80 flex items-center justify-center"
+          className="fixed inset-0 z-[9999] bg-#022949 flex items-center justify-center"
           onClick={() => setPreviewImage(null)}
         >
           <div className="relative max-w-5xl max-h-[90vh] p-4">
@@ -1165,7 +1165,7 @@ const handleApproveCarTypes = async () => {
 
 
       {isApproveModalOpen && (
-        <div className="fixed inset-0 z-[9999] bg-black/50 flex items-center justify-center">
+        <div className="fixed inset-0 z-[9999] bg-#022949 flex items-center justify-center">
           <div className="bg-white w-full max-w-lg rounded-xl p-6">
 
             <h3 className="text-lg font-bold mb-4">

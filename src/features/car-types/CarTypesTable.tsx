@@ -8,9 +8,13 @@ interface CarTypesTableProps {
   onDelete?: (item: CarType) => void;
 }
 
-const formatPrice = (n: number) => n?.toFixed(2);
+const formatPrice = (n?: number) => (n != null ? n.toFixed(2) : '-');
 
 const CarTypesTable: React.FC<CarTypesTableProps> = ({ items, onEdit, onDelete }) => {
+  // Read country from localStorage (set by CountrySwitcher)
+  const countryCode = localStorage.getItem('countryCode') || '+20';
+  const isYemen = countryCode === '+967';
+
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
       <div className="overflow-x-auto">
@@ -20,11 +24,23 @@ const CarTypesTable: React.FC<CarTypesTableProps> = ({ items, onEdit, onDelete }
               <th className="px-4 py-3 text-right text-xs font-semibold text-gray-600">#</th>
               <th className="px-4 py-3 text-right text-xs font-semibold text-gray-600">الصورة</th>
               <th className="px-4 py-3 text-right text-xs font-semibold text-gray-600">الاسم</th>
-              <th className="px-4 py-3 text-right text-xs font-semibold text-gray-600">سعر/كم</th>
-              <th className="px-4 py-3 text-right text-xs font-semibold text-gray-600">الحد الأدنى للأجرة</th>
-              <th className="px-4 py-3 text-right text-xs font-semibold text-gray-600">أدنى</th>
-              <th className="px-4 py-3 text-right text-xs font-semibold text-gray-600">أعلى</th>
-              <th className="px-4 py-3 text-right text-xs font-semibold text-gray-600">          السعر لكل كيلو متر وقت الازدحام </th>
+
+              {isYemen ? (
+                <>
+                  <th className="px-4 py-3 text-right text-xs font-semibold text-yellow-700 bg-yellow-50">سعر/كم (اليمن)</th>
+                  <th className="px-4 py-3 text-right text-xs font-semibold text-yellow-700 bg-yellow-50">الحد الأدنى للأجرة (اليمن)</th>
+                  <th className="px-4 py-3 text-right text-xs font-semibold text-yellow-700 bg-yellow-50">سعر الازدحام (اليمن)</th>
+                </>
+              ) : (
+                <>
+                  <th className="px-4 py-3 text-right text-xs font-semibold text-gray-600">سعر/كم</th>
+                  <th className="px-4 py-3 text-right text-xs font-semibold text-gray-600">الحد الأدنى للأجرة</th>
+                  <th className="px-4 py-3 text-right text-xs font-semibold text-gray-600">أدنى</th>
+                  <th className="px-4 py-3 text-right text-xs font-semibold text-gray-600">أعلى</th>
+                  <th className="px-4 py-3 text-right text-xs font-semibold text-gray-600">السعر لكل كيلومتر وقت الازدحام</th>
+                </>
+              )}
+
               <th className="px-4 py-3 text-right text-xs font-semibold text-gray-600">الحالة</th>
               <th className="px-4 py-3 text-right text-xs font-semibold text-gray-600">الوصف</th>
               {(onEdit || onDelete) && (
@@ -42,11 +58,23 @@ const CarTypesTable: React.FC<CarTypesTableProps> = ({ items, onEdit, onDelete }
                   </div>
                 </td>
                 <td className="px-4 py-3 text-sm font-medium text-gray-900 whitespace-nowrap">{car.name}</td>
-                <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap">{formatPrice(car.pricePerKm)}</td>
-                <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap">{car.minimumFare ? formatPrice(car.minimumFare) : '-'}</td>
-                <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap">{formatPrice(car.minPricePerKm)}</td>
-                <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap">{formatPrice(car.maxPricePerKm)}</td>
-                <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap">{formatPrice(car.surgePriceMultiplier)}</td>
+
+                {isYemen ? (
+                  <>
+                    <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap bg-yellow-50/40">{formatPrice(car.pricePerKmYemen)}</td>
+                    <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap bg-yellow-50/40">{formatPrice(car.minimumFareYemen)}</td>
+                    <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap bg-yellow-50/40">{formatPrice(car.surgePriceMultiplierYemen)}</td>
+                  </>
+                ) : (
+                  <>
+                    <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap">{formatPrice(car.pricePerKm)}</td>
+                    <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap">{formatPrice(car.minimumFare)}</td>
+                    <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap">{formatPrice(car.minPricePerKm)}</td>
+                    <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap">{formatPrice(car.maxPricePerKm)}</td>
+                    <td className="px-4 py-3 text-sm text-gray-800 whitespace-nowrap">{formatPrice(car.surgePriceMultiplier)}</td>
+                  </>
+                )}
+
                 <td className="px-4 py-3 whitespace-nowrap">
                   {car.isActive ? (
                     <span className="inline-flex items-center gap-1 text-green-700 bg-green-50 border border-green-200 px-2 py-1 rounded-full text-xs">
@@ -58,7 +86,9 @@ const CarTypesTable: React.FC<CarTypesTableProps> = ({ items, onEdit, onDelete }
                     </span>
                   )}
                 </td>
-                <td className="px-4 py-3 text-sm text-gray-600 max-w-[24rem]"><div className="line-clamp-2">{car.description || '-'}</div></td>
+                <td className="px-4 py-3 text-sm text-gray-600 max-w-[24rem]">
+                  <div className="line-clamp-2">{car.description || '-'}</div>
+                </td>
                 {(onEdit || onDelete) && (
                   <td className="px-4 py-3 whitespace-nowrap">
                     <div className="flex items-center gap-2">
@@ -90,7 +120,7 @@ const CarTypesTable: React.FC<CarTypesTableProps> = ({ items, onEdit, onDelete }
 
             {items.length === 0 && (
               <tr>
-                <td colSpan={onEdit || onDelete ? 10 : 9} className="px-4 py-10 text-center text-gray-500">
+                <td colSpan={onEdit || onDelete ? 11 : 10} className="px-4 py-10 text-center text-gray-500">
                   لا توجد بيانات أنواع سيارات حالياً.
                 </td>
               </tr>
@@ -102,4 +132,4 @@ const CarTypesTable: React.FC<CarTypesTableProps> = ({ items, onEdit, onDelete }
   );
 };
 
-export default CarTypesTable; 
+export default CarTypesTable;

@@ -583,7 +583,7 @@ const ReportsPage: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-indigo-800 rounded-xl flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 bg-#022949 rounded-xl flex items-center justify-center shadow-lg">
               <HiDocumentReport className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -649,7 +649,7 @@ const ReportsPage: React.FC = () => {
           className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
         >
           <div className="flex items-center gap-3 mb-4">
-            <HiFilter className="w-5 h-5 text-indigo-800" />
+            <HiFilter className="w-5 h-5 text-#022949" />
             <h3 className="text-lg font-semibold text-gray-800">فلاتر التقرير</h3>
           </div>
           
@@ -705,7 +705,7 @@ const ReportsPage: React.FC = () => {
             <button
               onClick={handleApplyFilters}
               disabled={loading}
-              className="flex items-center gap-2 px-6 py-2 bg-indigo-800 text-white rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50"
+              className="flex items-center gap-2 px-6 py-2 bg-#022949 text-white rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50"
             >
               <HiChartBar className="w-4 h-4" />
               تطبيق الفلاتر

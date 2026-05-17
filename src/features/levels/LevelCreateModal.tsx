@@ -35,7 +35,7 @@ const LevelCreateModal: React.FC<Props> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-[999] bg-#022949 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between px-5 py-4 border-b sticky top-0 bg-white z-10">
           <h3 className="text-lg font-bold text-gray-900">{isEditMode ? 'تعديل مستوى' : 'إضافة مستوى جديد'}</h3>
@@ -105,7 +105,7 @@ const LevelCreateModal: React.FC<Props> = ({
               type="submit"
               disabled={!canSubmit || submitting}
               className={`px-4 py-2 rounded-lg text-white ${
-                submitting || !canSubmit ? 'bg-indigo-800/60 cursor-not-allowed' : 'bg-indigo-800 hover:bg-indigo-700'
+                submitting || !canSubmit ? 'bg-#022949 cursor-not-allowed' : 'bg-#022949 hover:bg-indigo-700'
               } transition-colors`}
             >
               {submitting ? 'جاري الحفظ...' : 'حفظ'}

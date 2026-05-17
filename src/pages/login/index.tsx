@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { HiEye, HiEyeOff, HiUser, HiLockClosed } from "react-icons/hi";
-import logo from "../../assets/logo.jpeg";
+import logo from "../../assets/logo.png";
 import axiosInstance from "../../api/AxiosIntance";
 import Swal from "sweetalert2";
 import { getAllowedRoutes } from "../../utils/auth";

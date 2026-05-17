@@ -330,7 +330,7 @@ const fetchEmployeeById = async (id) => {
       {/* ================= Assign Modal ================= */}
 
       {isAssignOpen && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-#022949 flex items-center justify-center z-50">
           <div className="bg-white w-[520px] rounded-xl shadow-lg p-6 space-y-5">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-bold text-blue-600">
@@ -406,7 +406,7 @@ const fetchEmployeeById = async (id) => {
       {/* ================= Add Employee  Modal ================= */}
       
       {isAddEmployeeOpen && (
-          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-#022949 flex items-center justify-center z-50">
             <div className="bg-white w-[520px] rounded-xl shadow-lg p-6 space-y-5">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-bold text-green-600">
@@ -475,7 +475,7 @@ const fetchEmployeeById = async (id) => {
         )}
 
       {isEmployeeDetailsOpen && selectedEmployee && (
-          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-#022949 flex items-center justify-center z-50">
             <div className="bg-white w-[600px] rounded-xl shadow-lg p-6 space-y-5">
 
               {/* Header */}

@@ -32,10 +32,9 @@ interface AdvertisementForm {
   isActive?: boolean;
 }
 
-
 /* ================= CONFIG ================= */
 
-const FILE_BASE_URL = "https://api.wasalny-dashboard.info/";
+const FILE_BASE_URL = "https://amanapi.runasp.net/";
 
 /* ================= SMALL COMPONENT ================= */
 
@@ -90,15 +89,15 @@ const AdModal: React.FC<AdModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
+      className="fixed inset-0 z-[999] bg-#022949 backdrop-blur-sm flex items-center justify-center p-4"
       onClick={onClose}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-3xl bg-white rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
+        className="w-full max-w-3xl bg-#D89022 rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
       >
         {/* Header */}
-        <div className="flex justify-between items-center px-6 py-4 border-b sticky top-0 bg-white">
+        <div className="flex justify-between items-center px-6 py-4 border-b sticky top-0 bg-#D89022">
           <h3 className="text-lg font-bold">
             {mode === "add" && "إضافة إعلان"}
             {mode === "edit" && "تعديل إعلان"}
@@ -120,7 +119,7 @@ const AdModal: React.FC<AdModalProps> = ({
                 <video
                   src={previewSrc}
                   controls
-                  className="w-full max-h-[400px] bg-black"
+                  className="w-full max-h-[400px] bg-#022949"
                 />
               ) : (
                 <img
@@ -348,7 +347,7 @@ const Advertisement = () => {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl border overflow-hidden">
+      <div className="bg-#D89022 rounded-xl border overflow-hidden">
       {loading ? (
         <LoadingSpinner />
       ) : (

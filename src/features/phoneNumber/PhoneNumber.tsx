@@ -25,6 +25,9 @@ const PhoneNumber: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const rawCountryCode = localStorage.getItem('countryCode') || '+20';
+  const countryCode = rawCountryCode === '+967' ? 'YE' : 'EG';
+
   // Get
   useEffect(() => {
     const fetchNumbers = async () => {
@@ -52,7 +55,11 @@ const PhoneNumber: React.FC = () => {
     }
     setAdding(true);
     try {
-      const res = await axiosInstance.post('/ContactNumbers', { phoneNumber, label });
+      const res = await axiosInstance.post('/ContactNumbers', {
+        phoneNumber,
+        label,
+        countryCode,
+      });
       const newNumber = res.data.data;
       setNumbers(prev => [...prev, newNumber]);
       toast.success('تم إضافة الرقم بنجاح');
@@ -90,7 +97,11 @@ const PhoneNumber: React.FC = () => {
     setAdding(true);
     try {
       if (editingId) {
-        const res = await axiosInstance.put(`/ContactNumbers/${editingId}`, { phoneNumber, label });
+        const res = await axiosInstance.put(`/ContactNumbers/${editingId}`, {
+          phoneNumber,
+          label,
+          countryCode,
+        });
         const updatedNumber = res.data.data ?? { id: editingId, phoneNumber, label };
         setNumbers(prev => prev.map(n => n.id === editingId ? { ...n, ...updatedNumber } : n));
         toast.success('تم تعديل الرقم بنجاح');
@@ -129,8 +140,6 @@ const PhoneNumber: React.FC = () => {
     }
   };
 
-
-
   if (loading) return <LoadingSpinner />;
 
   // Filter
@@ -151,20 +160,33 @@ const PhoneNumber: React.FC = () => {
           <p className="text-gray-500 mt-1">إدارة أرقام الاتصال — أضف، عدل أو احذف بسهولة</p>
         </div>
 
-        {/* Search box */}
-        <div className="w-full sm:w-72 relative">
-          <input
-            type="text"
-            placeholder="ابحث بالاسم أو الرقم..."
-            value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
-            className="w-full border rounded-lg py-2 pr-10 pl-4 text-base focus:outline-none focus:ring-2 focus:ring-blue-300"
-          />
-          {searchTerm && (
-            <button onClick={() => setSearchTerm('')} className="absolute left-1 top-1/2 -translate-y-1/2 p-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">
-              مسح
-            </button>
-          )}
+        <div className="flex items-center gap-3">
+          {/* Country badge */}
+          <span
+            className={`text-xs font-medium px-3 py-1.5 rounded-full border ${
+              countryCode === 'YE'
+                ? 'bg-yellow-100 text-yellow-800 border-yellow-300'
+                : 'bg-blue-100 text-blue-800 border-blue-300'
+            }`}
+          >
+            {countryCode === 'YE' ? '🇾🇪 اليمن' : '🇪🇬 مصر'}
+          </span>
+
+          {/* Search box */}
+          <div className="w-full sm:w-72 relative">
+            <input
+              type="text"
+              placeholder="ابحث بالاسم أو الرقم..."
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+              className="w-full border rounded-lg py-2 pr-10 pl-4 text-base focus:outline-none focus:ring-2 focus:ring-blue-300"
+            />
+            {searchTerm && (
+              <button onClick={() => setSearchTerm('')} className="absolute left-1 top-1/2 -translate-y-1/2 p-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">
+                مسح
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
@@ -235,11 +257,22 @@ const PhoneNumber: React.FC = () => {
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Edit Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-#022949 bg-opacity-30 flex justify-center items-center z-50">
           <div className="bg-white rounded-xl p-6 w-full max-w-md shadow-lg">
-            <h2 className="text-lg font-semibold mb-4">تعديل الرقم</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold">تعديل الرقم</h2>
+              <span
+                className={`text-xs font-medium px-2 py-1 rounded-full border ${
+                  countryCode === 'YE'
+                    ? 'bg-yellow-100 text-yellow-800 border-yellow-300'
+                    : 'bg-blue-100 text-blue-800 border-blue-300'
+                }`}
+              >
+                {countryCode === 'YE' ? '🇾🇪 اليمن' : '🇪🇬 مصر'}
+              </span>
+            </div>
             <form onSubmit={handleEditNumber} className="space-y-3">
               <input
                 type="text"

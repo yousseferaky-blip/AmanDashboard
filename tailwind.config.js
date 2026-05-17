@@ -10,7 +10,7 @@ export default {
         'cairo': ['Cairo', 'sans-serif'],
       },
       colors: { 
-        primaryText: "#1e40af", // indigo-800
+        primaryText: "#1e40af", 
         primary: {
           50: '#eef2ff',
           100: '#e0e7ff',

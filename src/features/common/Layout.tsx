@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { ReactNode } from 'react';
 import Sidebar from './Sidebar';
+import CountrySwitcher from '../countrySwitcher/CountrySwitcher';
 
 interface LayoutProps {
   children: ReactNode;
@@ -49,6 +50,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
+              {/* <CountrySwitcher /> */}
             </div>
 
             {/* Right side - User info */}

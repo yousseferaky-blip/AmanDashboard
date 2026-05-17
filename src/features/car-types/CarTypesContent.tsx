@@ -9,6 +9,22 @@ import CarTypeCreateModal from './CarTypeCreateModal';
 import type { CarType, ApiResponse } from './types';
 import Swal from 'sweetalert2';
 
+const initialForm = {
+  name: '',
+  // Egypt
+  pricePerKm: '',
+  minimumFare: '',
+  surgePriceMultiplier: '',
+  // Yemen
+  pricePerKmYemen: '',
+  minimumFareYemen: '',
+  surgePriceMultiplierYemen: '',
+  // Common
+  isActive: true,
+  description: '',
+  imageFile: null as File | null,
+};
+
 const CarTypesContent: React.FC = () => {
   const [carTypes, setCarTypes] = useState<CarType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -20,18 +36,13 @@ const CarTypesContent: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [form, setForm] = useState<{ name: string;  surgePriceMultiplier: string;pricePerKm: string; minimumFare: string; isActive: boolean; description: string; imageFile: File | null; }>({
-    name: '',
-    pricePerKm: '',
-    minimumFare: '',
-    isActive: true,
-    description: '',
-    surgePriceMultiplier: '',
-    imageFile: null,
-  });
+  const [form, setForm] = useState(initialForm);
+
+  const countryCode = localStorage.getItem('countryCode') || '+20';
+  const isYemen = countryCode === '+967';
 
   const resetForm = () => {
-    setForm({ name: '', pricePerKm: '', surgePriceMultiplier:"",minimumFare: '', isActive: true, description: '', imageFile: null });
+    setForm(initialForm);
     setPreviewUrl(null);
     setFormError(null);
     setIsEditMode(false);
@@ -65,9 +76,15 @@ const CarTypesContent: React.FC = () => {
   const openEditDialog = (item: CarType) => {
     setForm({
       name: item.name,
-      pricePerKm: item.pricePerKm.toString(),
+      // Egypt
+      pricePerKm: item.pricePerKm?.toString() || '',
       minimumFare: item.minimumFare?.toString() || '',
-        surgePriceMultiplier: item.surgePriceMultiplier?.toString() || '',
+      surgePriceMultiplier: item.surgePriceMultiplier?.toString() || '',
+      // Yemen
+      pricePerKmYemen: item.pricePerKmYemen?.toString() || '',
+      minimumFareYemen: item.minimumFareYemen?.toString() || '',
+      surgePriceMultiplierYemen: item.surgePriceMultiplierYemen?.toString() || '',
+      // Common
       isActive: item.isActive,
       description: item.description || '',
       imageFile: null,
@@ -83,11 +100,12 @@ const CarTypesContent: React.FC = () => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
-    setForm(prev => ({ 
-      ...prev, 
-      [name]: type === 'checkbox' ? checked : value 
+    setForm(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
+
   const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     setForm(prev => ({ ...prev, imageFile: file }));
@@ -95,44 +113,39 @@ const CarTypesContent: React.FC = () => {
     setPreviewUrl(file ? URL.createObjectURL(file) : null);
   };
 
-  const canSubmit = useMemo(() => {
-    if (isEditMode) {
-      return form.name.trim() && form.pricePerKm;
-    }
-    return form.name.trim() && form.pricePerKm && form.imageFile; 
-  }, [form, isEditMode]);
-
   const submitForm = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!canSubmit) {
-      setFormError('يرجى تعبئة الحقول المطلوبة');
-      toast.error('يرجى تعبئة الحقول المطلوبة');
-      return;
-    }
     setSubmitting(true);
     setFormError(null);
     try {
       const fd = new FormData();
       fd.append('Name', form.name.trim());
-      fd.append('PricePerKm', String(Number(form.pricePerKm)));
       fd.append('IsActive', String(form.isActive));
       if (form.description) fd.append('Description', form.description);
+
+      // ── Always send ALL fields to avoid overwriting other country's data with 0 ──
+      // Egypt fields
+      if (form.pricePerKm) fd.append('PricePerKm', String(Number(form.pricePerKm)));
       if (form.minimumFare) fd.append('MinimumFare', form.minimumFare);
-       if (form.surgePriceMultiplier) {
-        fd.append(
-          'SurgePriceMultiplier',
-          String(Number(form.surgePriceMultiplier))
-        );
-      }
-      // if (form.imageFile) fd.append('Image', form.imageFile);
+      if (form.surgePriceMultiplier) fd.append('SurgePriceMultiplier', String(Number(form.surgePriceMultiplier)));
+      // Yemen fields
+      if (form.pricePerKmYemen) fd.append('PricePerKmYemen', String(Number(form.pricePerKmYemen)));
+      if (form.minimumFareYemen) fd.append('MinimumFareYemen', String(Number(form.minimumFareYemen)));
+      if (form.surgePriceMultiplierYemen) fd.append('SurgePriceMultiplierYemen', String(Number(form.surgePriceMultiplierYemen)));
+
       if (form.imageFile instanceof File) {
         fd.append('Image', form.imageFile);
       }
+
       if (isEditMode && editingId) {
-        await axiosInstance.put(`/CarTypes/${editingId}`, fd, { headers: { 'Content-Type': 'multipart/form-data' } });
+        await axiosInstance.put(`/CarTypes/${editingId}`, fd, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
         toast.success('تم تحديث نوع السيارة بنجاح');
       } else {
-        await axiosInstance.post('/CarTypes', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
+        await axiosInstance.post('/CarTypes', fd, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
         toast.success('تم إضافة نوع السيارة بنجاح');
       }
 
@@ -149,38 +162,35 @@ const CarTypesContent: React.FC = () => {
   };
 
   const handleDelete = async (item: CarType) => {
-  const result = await Swal.fire({
-    title: 'تأكيد الحذف',
-    text: `هل أنت متأكد من حذف النوع: ${item.name}؟`,
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'نعم، احذف',
-    cancelButtonText: 'إلغاء',
-    confirmButtonColor: '#4f46e5', // indigo-600
-    cancelButtonColor: '#9ca3af',  // gray-400
-    reverseButtons: true,
-    focusCancel: true,
-  });
-
-  if (!result.isConfirmed) return;
-
-  try {
-    await axiosInstance.delete(`/CarTypes/${item.id}`);
-    toast.success('تم حذف النوع بنجاح');
-    await fetchCarTypes();
-  } catch (err: unknown) {
-    const errorMessage =
-      (err as { response?: { data?: { message?: string } } })?.response?.data?.message;
-
-    Swal.fire({
-      icon: 'error',
-      title: 'خطأ',
-      text: errorMessage || 'تعذر حذف النوع',
-      confirmButtonText: 'حسناً',
+    const result = await Swal.fire({
+      title: 'تأكيد الحذف',
+      text: `هل أنت متأكد من حذف النوع: ${item.name}؟`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'نعم، احذف',
+      cancelButtonText: 'إلغاء',
+      confirmButtonColor: '#4f46e5',
+      cancelButtonColor: '#9ca3af',
+      reverseButtons: true,
+      focusCancel: true,
     });
-  }
-};
 
+    if (!result.isConfirmed) return;
+
+    try {
+      await axiosInstance.delete(`/CarTypes/${item.id}`);
+      toast.success('تم حذف النوع بنجاح');
+      await fetchCarTypes();
+    } catch (err: unknown) {
+      const errorMessage = (err as { response?: { data?: { message?: string } } })?.response?.data?.message;
+      Swal.fire({
+        icon: 'error',
+        title: 'خطأ',
+        text: errorMessage || 'تعذر حذف النوع',
+        confirmButtonText: 'حسناً',
+      });
+    }
+  };
 
   const handleEdit = async (item: CarType) => {
     openEditDialog(item);
@@ -192,10 +202,25 @@ const CarTypesContent: React.FC = () => {
 
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-3">
-          <HiOutlineTruck className="w-8 h-8 text-indigo-800" />
+          <HiOutlineTruck className="w-8 h-8 text-#022949" />
           <h1 className="text-2xl font-bold text-gray-800">إدارة أنواع السيارات</h1>
+          {/* Country indicator */}
+          <span
+            className={`text-xs font-medium px-2 py-1 rounded-full ${
+              isYemen
+                ? 'bg-yellow-100 text-yellow-800 border border-yellow-300'
+                : 'bg-blue-100 text-blue-800 border border-blue-300'
+            }`}
+          >
+            {isYemen ? '🇾🇪 اليمن' : '🇪🇬 مصر'}
+          </span>
         </div>
-        <button onClick={openDialog} className="inline-flex items-center gap-2 bg-indigo-800 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700 hover:shadow-md transition-all">إضافة نوع سيارة</button>
+        <button
+          onClick={openDialog}
+          className="inline-flex items-center gap-2 bg-indigo-800 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700 hover:shadow-md transition-all"
+        >
+          إضافة نوع سيارة
+        </button>
       </div>
 
       {loading && (
@@ -228,4 +253,4 @@ const CarTypesContent: React.FC = () => {
   );
 };
 
-export default CarTypesContent; 
+export default CarTypesContent;

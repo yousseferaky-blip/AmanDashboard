@@ -192,7 +192,7 @@ const UsersContent: React.FC = () => {
 
       {/* Send Notification Modal */}
       {isNotificationModalOpen && (
-        <div className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeNotificationModal}>
+        <div className="fixed inset-0 z-[999] bg-#022949 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeNotificationModal}>
           <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between px-5 py-4 border-b sticky top-0 bg-white z-10">
               <h3 className="text-lg font-bold text-gray-900">
