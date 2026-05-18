@@ -104,7 +104,7 @@ const LevelCreateModal: React.FC<Props> = ({
             <button
               type="submit"
               disabled={!canSubmit || submitting}
-              className={`px-4 py-2 rounded-lg text-white ${
+              className={`px-4 py-2 rounded-lg text-black hover:text-white ${
                 submitting || !canSubmit ? 'bg-#022949 cursor-not-allowed' : 'bg-#022949 hover:bg-indigo-700'
               } transition-colors`}
             >

@@ -185,7 +185,7 @@ const CouponCreateModal: React.FC<Props> = ({
             <button
               type="submit"
               disabled={!canSubmit || submitting}
-              className={`w-full sm:w-auto px-4 py-2 text-sm sm:text-base rounded-lg text-white ${
+              className={`w-full sm:w-auto px-4 py-2 text-sm sm:text-base rounded-lg text-black hover:text-white ${
                 submitting || !canSubmit ? 'bg-#022949 cursor-not-allowed' : 'bg-#022949 hover:bg-indigo-700'
               } transition-colors`}
             >
