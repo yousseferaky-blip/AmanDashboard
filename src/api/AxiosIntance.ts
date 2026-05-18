@@ -18,28 +18,6 @@ const axiosInstance: AxiosInstance = axios.create({
   timeout: 30000,
 });
 
-// axiosInstance.interceptors.request.use(
-//   (config: InternalAxiosRequestConfig) => {
-//     try {
-//       const token =
-//         localStorage.getItem("accessToken") || localStorage.getItem("token");
-//       if (token) {
-//         if ((config.headers as any)?.set) {
-//           (config.headers as any).set("Authorization", `Bearer ${token}`);
-//         } else {
-//           (config.headers as any) = {
-//             ...(config.headers as any),
-//             Authorization: `Bearer ${token}`,
-//           };
-//         }
-//       }
-//     } catch {
-//       // ignore storage access errors
-//     }
-//     return config;
-//   },
-//   (error: AxiosError) => Promise.reject(error)
-// );
 
 axiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
@@ -59,12 +37,12 @@ axiosInstance.interceptors.request.use(
         }
       }
 
-      const countryCode = localStorage.getItem("countryCode") || "+20";
+      // const countryCode = localStorage.getItem("countryCode") || "+20";
 
-      config.params = {
-        ...config.params,
-        countryCode,
-      };
+      // config.params = {
+      //   ...config.params,
+      //   countryCode,
+      // };
     } catch {
       // ignore
     }
