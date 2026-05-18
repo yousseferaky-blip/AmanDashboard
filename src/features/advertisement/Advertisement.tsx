@@ -329,7 +329,7 @@ const Advertisement = () => {
   return (
     <motion.div className="p-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       {/* Header */}
-      <div className="flex justify-between mb-6">
+      <div className="flex justify-between mb-6 flex-wrap">
         <div>
           <h1 className="text-3xl font-bold">الإعلانات</h1>
           <p className="text-gray-500">إدارة الإعلانات</p>

@@ -508,7 +508,7 @@ const filteredMenuItems = menuItems.filter((item) => {
       </AnimatePresence>
     </motion.div>
   </div>
-</motion.div>
+    </motion.div>
 
   );
 };

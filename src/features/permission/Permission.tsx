@@ -154,9 +154,9 @@ const fetchEmployeeById = async (id) => {
     <div className="space-y-8">
       {/* Header */}
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-4">
         <h1 className="text-3xl font-bold text-blue-600">إدارة الصلاحيات</h1>
-       <div className="flex items-center gap-3">
+       <div className="flex items-center flex-wrap gap-3">
             <button
                 onClick={() => {
                   setSelectedUser("");

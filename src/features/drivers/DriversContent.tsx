@@ -822,12 +822,12 @@ const [submittingApproval, setSubmittingApproval] = useState(false);
     >
       <ToastContainer position="top-center" rtl newestOnTop closeOnClick theme="dark" />
       
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap">
         <div>
           <h1 className="text-2xl font-bold text-gray-800">إدارة السائقين</h1>
           <p className="text-gray-600">إدارة جميع السائقين في النظام</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           <button
             onClick={() => openNotificationModal(null, 'all')}
             className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"

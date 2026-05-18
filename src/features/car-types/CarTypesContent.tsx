@@ -200,7 +200,7 @@ const CarTypesContent: React.FC = () => {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-6 space-y-6">
       <ToastContainer position="top-center" rtl newestOnTop closeOnClick theme="dark" />
 
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex items-center justify-between mb-2 flex-wrap gap-4">
         <div className="flex items-center gap-3">
           <HiOutlineTruck className="w-8 h-8 text-#022949" />
           <h1 className="text-2xl font-bold text-gray-800">إدارة أنواع السيارات</h1>

@@ -130,7 +130,7 @@ const VerificationCodes = () => {
   return (
     <div className="p-6">
       
-      <div className="flex justify-between mb-4">
+      <div className="flex justify-between mb-4 flex-wrap gap-4">
         <h2 className="text-xl font-bold">رموز التحقق</h2>
         <button
           onClick={deleteAll}
@@ -142,7 +142,7 @@ const VerificationCodes = () => {
 
       {/* STATISTICS */}
       {stats && (
-        <div className="grid grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4  mb-6">
           <div className="p-3 bg-gray-100 rounded">الإجمالي: {stats.total}</div>
           <div className="p-3 bg-green-100 rounded">نشط: {stats.active}</div>
           <div className="p-3 bg-red-100 rounded">منتهي: {stats.expired}</div>
